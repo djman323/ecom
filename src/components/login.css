@@ -1,0 +1,45 @@
+.log {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.navImg {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.navImg:hover {
+  cursor: pointer;
+  transition: 0.3s ease-in;
+  transform: scale(1.1);
+}
+.co1 {
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+.c1 {
+  width: 500px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+.c1:hover {
+  cursor: pointer;
+  transition: 0.3s ease-in;
+  transform: scale(1.1);
+}
