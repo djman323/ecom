@@ -1,26 +1,25 @@
-// src/login.jsx
+// src/register.jsx
 import React, { useState } from "react";
-import { useAuth } from "../auth-context"; // Correct path
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import pm from "../assets/P.png"; // Correct path
-import "../components/login.css";
+import pm from "../src/assets/P.png"; // Correct path
+import { useAuth } from "../src/auth-context"; // Correct path
+import "../src/components/login.css";
 
-export const Login = () => {
-  const { login, googleLogin, user, logout } = useAuth(); // Get context functions
+export const Register = ({ setIsRegister }) => {
+  const { register, googleLogin, user, logout } = useAuth(); // Get context functions
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [displayName, setDisplayName] = useState("");
 
-  // Handle form login
-  const handleLogin = async () => {
-    if (email.trim() && password.trim()) {
+  // Handle form registration
+  const handleRegister = async () => {
+    if (email.trim() && password.trim() && displayName.trim()) {
       try {
-        await login(email, password); // Use context function to login
+        await register(email, password, displayName); // Use context function to register
       } catch (error) {
-        console.error("Login error: ", error.message);
+        console.error("Registration error: ", error.message);
       }
     } else {
-      alert("Please enter a valid email and password");
+      alert("Please fill in all fields");
     }
   };
 
@@ -39,7 +38,16 @@ export const Login = () => {
             </div>
           ) : (
             <div>
-              <h1>Login Page</h1>
+              <h1>Register Page</h1>
+              <label>
+                Display Name:
+                <input
+                  type="text"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                />
+              </label>
+              <br />
               <label>
                 Email:
                 <input
@@ -58,15 +66,13 @@ export const Login = () => {
                 />
               </label>
               <br />
-              <button onClick={handleLogin}>Login</button>
+              <button onClick={handleRegister}>Register</button>
               <br />
-              <button onClick={googleLogin}>Login with Google</button>
+              <button onClick={googleLogin}>Register with Google</button>
               <br />
               <p>
-                Don't have an account?{" "}
-                <button onClick={() => navigate("/register")}>
-                  Register here
-                </button>
+                Already have an account?{" "}
+                <button onClick={() => setIsRegister(false)}>Login here</button>
               </p>
             </div>
           )}

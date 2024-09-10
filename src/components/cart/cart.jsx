@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 export const Cart = () => {
   const { cartItems, getTotalCartAmount } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
-
   const navigate = useNavigate();
+
   return (
     <div className="cart">
       <div className="cartTitle">
@@ -18,14 +18,17 @@ export const Cart = () => {
       </div>
       <div className="cartItems">
         {PRODUCTS.map((product) => {
-          if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} />;
+          // Check if the product is in the cart and has a quantity greater than 0
+          if (cartItems[product.id] > 0) {
+            return <CartItem key={product.id} data={product} />;
           }
+          // Optionally return null for cases where the product is not in the cart
+          return null;
         })}
       </div>
       {totalAmount > 0 ? (
         <div className="checkout">
-          <p>Subtotal: ${totalAmount} </p>
+          <p>Subtotal: ${totalAmount}</p>
           <button onClick={() => navigate("/")}>Continue Shopping</button>
           <button>Checkout</button>
         </div>
